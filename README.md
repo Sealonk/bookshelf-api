@@ -15,7 +15,7 @@ To install and run this project locally, follow these steps:
 1. Clone the repository:
 
    ```bash
-   https://github.com/Sealonk/bookshelf-api.git
+   git clone https://github.com/Sealonk/bookshelf-api.git
 
 2. Navigate into the project directory:
 
