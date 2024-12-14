@@ -1,67 +1,181 @@
 # Bookshelf API
 
-## Table of Contents
+This is a simple API for managing books using Hapi.js. The API allows you to add, view, update, and delete books. Each book includes details such as name, year, author, summary, publisher, page count, reading progress, and the status of the book (whether it is finished).
 
-1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Contributing](#contributing)
-4. [License](#license)
-5. [Contact](#contact)
+## Features
 
-## Installation
+- **Add a book**: You can add a new book with details such as name, year, author, summary, publisher, etc.
+- **Get all books**: Retrieve a list of all books with basic information (id, name, publisher).
+- **Get a book by ID**: View detailed information for a specific book by its ID.
+- **Edit a book**: Update the details of a book by its ID.
+- **Delete a book**: Remove a book from the list by its ID.
 
-To install and run this project locally, follow these steps:
+## Technologies Used
 
-1. Clone the repository:
+- [Hapi.js](https://hapi.dev/): Web framework for building the server.
+- [ESLint](https://eslint.org/): Linting for JavaScript to maintain code quality.
+- [NanoID](https://github.com/ai/nanoid): A small, secure, and URL-friendly unique string ID generator.
 
-   ```bash
-   git clone https://github.com/Sealonk/bookshelf-api.git
+## Setup
 
-2. Navigate into the project directory:
+To get started with this project locally, follow these steps:
 
-   ```bash
-   cd bookshelf-api
-   ```
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Sealonk/bookshelf-api.git
+```
+
+### 2. Install dependencies
+
+```bash
+cd bookshelf-api
+npm install
+```
    
-3. Install the required dependencies:
+### 3. Run the application
 
-   ```bash
-   npm install   # For Node.js projects
-   pip install -r requirements.txt   # For Python projects
-   ```
+```bash
+npm run start
+```
 
-## Usage
+The server will start at `http://localhost:9000`.
 
-After setting up the project, here’s how you can use it:
+### 4. Lint the code
 
-1. Start the application:
+To check for linting issues, run::
 
-   ```bash
-   python app.py   # For Python projects
-   npm start       # For Node.js projects
-   ```
+```bash
+npm run lint
+```
 
-2. Visit the application in your browser at http://localhost:3000 (or the appropriate URL).
+## API Endpoints
 
-## Contributing
+### `POST /books`
 
-We welcome contributions! Please follow these steps to contribute:
+Add a new book.
 
-1. Fork the repository.
-2. Create a new branch (git checkout -b feature-branch).
-3. Commit your changes (git commit -am 'Add new feature').
-4. Push to the branch (git push origin feature-branch).
-5. Open a Pull Request.
+#### Request Body:
+```json
+{
+  "name": "Book Title",
+  "year": 2024,
+  "author": "Author Name",
+  "summary": "Book summary",
+  "publisher": "Publisher Name",
+  "pageCount": 300,
+  "readPage": 50,
+  "reading": true
+}
+```
 
-Make sure to write clear commit messages and follow the project's coding style.
+#### Response:
+```json
+{
+  "status": "success",
+  "message": "Buku berhasil ditambahkan",
+  "data": {
+    "bookId": "generated-id"
+  }
+}
+```
 
-## License
+### `GET /books`
 
-This project is licensed under the MIT License.
+Get a list of all books.
 
-## Contact
+#### Response:
+```json
+{
+  "status": "success",
+  "data": {
+    "books": [
+      {
+        "id": "book-id",
+        "name": "Book Title",
+        "publisher": "Publisher Name"
+      }
+    ]
+  }
+}
+```
 
-For any questions or feedback, feel free to reach out to:
+### `GET /books/{bookId}`
 
-- Name: Aloysius Andre N. H. M.
-- Email: aloysiusandrenhm@gmail.com
+Get detailed information about a book by its ID.
+
+#### Response:
+```json
+{
+  "status": "success",
+  "data": {
+    "book": {
+      "id": "book-id",
+      "name": "Book Title",
+      "year": 2024,
+      "author": "Author Name",
+      "summary": "Book summary",
+      "publisher": "Publisher Name",
+      "pageCount": 300,
+      "readPage": 50,
+      "reading": true,
+      "finished": false,
+      "insertedAt": "2024-12-14T00:00:00.000Z",
+      "updatedAt": "2024-12-14T00:00:00.000Z"
+    }
+  }
+}
+```
+
+### `PUT /books/{bookId}`
+
+Edit a book by its ID.
+
+#### Request Body:
+```json
+{
+  "name": "Updated Book Title",
+  "year": 2024,
+  "author": "Updated Author",
+  "summary": "Updated Summary",
+  "publisher": "Updated Publisher",
+  "pageCount": 350,
+  "readPage": 100,
+  "reading": true
+}
+```
+
+#### Response:
+```json
+{
+  "status": "success",
+  "message": "Buku berhasil diperbarui"
+}
+```
+
+### `DELETE /books/{bookId}`
+
+Delete a book by its ID.
+
+#### Response:
+```json
+{
+  "status": "success",
+  "message": "Buku berhasil dihapus"
+}
+```
+
+## Folder Scructure
+
+```graphql
+- src/
+  - books.js          # Stores the array of books
+  - handler.js        # Contains the handler functions for each API endpoint
+  - routes.js          # Maps routes to handler functions
+  - server.js          # Initializes and runs the Hapi.js server
+- .gitignore           # Git ignore file
+- eslint.config.mjs    # ESLint configuration file
+- package.json         # Project metadata and dependencies
+- package-lock.json    # Lock file for npm dependencies
+- README.md            # Project documentation
+```
