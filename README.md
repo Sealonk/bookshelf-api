@@ -175,6 +175,7 @@ Delete a book by its ID.
   - server.js          # Initializes and runs the Hapi.js server
 - .gitignore           # Git ignore file
 - eslint.config.mjs    # ESLint configuration file
+- node_modules
 - package.json         # Project metadata and dependencies
 - package-lock.json    # Lock file for npm dependencies
 - README.md            # Project documentation
