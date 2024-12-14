@@ -168,6 +168,7 @@ Delete a book by its ID.
 ## Folder Scructure
 
 ```graphql
+- node_modules/
 - src/
   - books.js          # Stores the array of books
   - handler.js        # Contains the handler functions for each API endpoint
@@ -175,7 +176,6 @@ Delete a book by its ID.
   - server.js          # Initializes and runs the Hapi.js server
 - .gitignore           # Git ignore file
 - eslint.config.mjs    # ESLint configuration file
-- node_modules
 - package.json         # Project metadata and dependencies
 - package-lock.json    # Lock file for npm dependencies
 - README.md            # Project documentation
